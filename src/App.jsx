@@ -98,10 +98,10 @@ export default function App() {
                 🎊
               </motion.div>
               <h2 className="text-2xl font-black gradient-text mb-2">
-                おめでとう！全問正解！
+                完成！
               </h2>
               <p className="text-gray-500 font-medium">
-                すべての文章を正しく組み合わせました！
+                すべての短歌を正しく組み合わせました！
               </p>
             </div>
           </motion.div>
@@ -110,7 +110,7 @@ export default function App() {
 
       {/* フッター */}
       <footer className="text-center text-gray-300 text-xs mt-12 pb-4">
-        web歌集｜フリップ芸｜(c)六条くるる
+        フリップ芸｜六条くるるweb歌集
       </footer>
     </div>
   );
