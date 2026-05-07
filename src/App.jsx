@@ -7,7 +7,7 @@ import { useGameReducer } from './hooks/useGameReducer';
 import sentences from './data/sentences.json';
 
 export default function App() {
-  const { state, selectLeft, selectRight, toggleVertical, resetGame } =
+  const { state, selectLeft, selectRight, toggleVertical, resetGame, showAnswers } =
     useGameReducer(sentences);
 
   return (
@@ -20,6 +20,7 @@ export default function App() {
         isVertical={state.isVertical}
         onToggle={toggleVertical}
         onReset={resetGame}
+        onShowAnswers={showAnswers}
         isGameComplete={state.isGameComplete}
       />
 

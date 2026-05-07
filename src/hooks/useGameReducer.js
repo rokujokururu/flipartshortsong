@@ -10,6 +10,7 @@ const ACTIONS = {
   RESET_MATCH_RESULT: 'RESET_MATCH_RESULT',
   TOGGLE_VERTICAL: 'TOGGLE_VERTICAL',
   RESET_GAME: 'RESET_GAME',
+  SHOW_ANSWERS: 'SHOW_ANSWERS',
 };
 
 function createInitialState(sentences) {
@@ -90,6 +91,18 @@ function gameReducer(state, action) {
       return createInitialState(action.payload);
     }
 
+    case ACTIONS.SHOW_ANSWERS: {
+      const allSentences = action.payload.sort((a, b) => a.order - b.order);
+      return {
+        ...state,
+        leftItems: [],
+        rightItems: [],
+        completed: allSentences,
+        matchResult: 'correct',
+        isGameComplete: true,
+      };
+    }
+
     default:
       return state;
   }
@@ -140,11 +153,16 @@ export function useGameReducer(sentences) {
     dispatch({ type: ACTIONS.RESET_GAME, payload: sentences });
   }, [sentences]);
 
+  const showAnswers = useCallback(() => {
+    dispatch({ type: ACTIONS.SHOW_ANSWERS, payload: sentences });
+  }, [sentences]);
+
   return {
     state,
     selectLeft,
     selectRight,
     toggleVertical,
     resetGame,
+    showAnswers,
   };
 }

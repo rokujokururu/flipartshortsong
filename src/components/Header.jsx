@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export default function Header({ isVertical, onToggle, onReset, isGameComplete }) {
+export default function Header({ isVertical, onToggle, onReset, onShowAnswers, isGameComplete }) {
   return (
     <header className="w-full py-6 px-4 sm:px-8">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
@@ -12,12 +12,27 @@ export default function Header({ isVertical, onToggle, onReset, isGameComplete }
         </div>
 
         {/* コントロール */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* 正解を表示ボタン */}
+          {!isGameComplete && (
+            <motion.button
+              onClick={onShowAnswers}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-card
+                         text-[10px] sm:text-sm font-bold text-coral hover:shadow-card-hover
+                         border border-coral/10 transition-all duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>💡</span>
+              <span className="whitespace-nowrap">正解を表示</span>
+            </motion.button>
+          )}
+
           {/* 縦書き切替ボタン */}
           <motion.button
             onClick={onToggle}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white shadow-card
-                       text-sm font-medium text-gray-600 hover:shadow-card-hover
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white shadow-card
+                       text-[10px] sm:text-sm font-medium text-gray-600 hover:shadow-card-hover
                        transition-all duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -26,11 +41,11 @@ export default function Header({ isVertical, onToggle, onReset, isGameComplete }
             <motion.span
               animate={{ rotate: isVertical ? 90 : 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="text-lg"
+              className="text-base sm:text-lg"
             >
               📝
             </motion.span>
-            <span className="hidden sm:inline">
+            <span className="whitespace-nowrap">
               {isVertical ? '横書き' : '縦書き'}
             </span>
           </motion.button>
